@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/signup.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+
+  <main class="signup-login">
+    <section class="signup">
+      <div class="form">
+        <h1>Sign up</h1>
+        <form action="">
+          <div class="input-div">
+            <div class="input email-div">
+              <label for="email">Email</label>
+              <input type="text" name="email" id="email" required>
+              <div class="email error"></div>
+            </div>
+            <div class="input password-div">
+              <label for="password">Password</label>
+              <input type="password" name="password" id="password" required>
+              <div class="password error"></div>
+            </div>
+          </div>
+          <div class="form-buttons">
+            <button>Sign up</button>
+            <div class="login-button">Log in</div>
+          </div>
+        </form>
+      </div>
+    </section>
+    
+    <section class="login">
+      <div class="form">
+        <h1>Log in</h1>
+        <form action="">
+          <div class="input-div">
+            <div class="input email-div">
+              <label for="email">Email</label>
+              <input type="text" name="email" id="login-email" required>
+              <div class="email error"></div>
+            </div>
+            <div class="input password-div">
+              <label for="password">Password</label>
+              <input type="password" name="password" id="login-password" required>
+              <div class="password error"></div>
+            </div>
+          </div>
+          <div class="form-buttons">
+            <button>Log in</button>
+            <div class="signup-button">Sign up</div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+
+  </main>
+  <section>
+    <div class="carousel">
+      <div class="group">
+        <div class="card">1</div>
+        <div class="card">2</div>
+        <div class="card">3</div>
+        <div class="card">4</div>
+        <div class="card">5</div>
+        <div class="card">6</div>
+      </div>
+      <div aria-hidden class="group">
+        <div class="card">1</div>
+        <div class="card">2</div>
+        <div class="card">3</div>
+        <div class="card">4</div>
+        <div class="card">5</div>
+        <div class="card">6</div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const formSignup = document.querySelector('form')
+    const emailError = document.querySelector('.email.error')
+    const passwordError = document.querySelector('.password.error')
+    
+    formSignup.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = formSignup.email.value
+      const password= formSignup.password.value
+      
+      try {
+        const res = await fetch('/signup', {
+          method: 'POST',
+          body: JSON.stringify({ email: email, password: password}),
+          headers: { 'Content-Type': 'application/json' }
+        })
+        const data = await res.json()
+        console.log(data)
+        if(data.err) {
+          if(typeof(data) == "object") {
+            emailError.style.padding = `${4}px`
+            passwordError.style.padding = `${4}px`
+          } else{
+            console.log('else')
+          }
+          emailError.textContent = data.err.email
+          passwordError.textContent = data.err.password
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    })
+  </script>
+
+  
+
+  <script>
+    const formLogin = document.querySelector('form')
+
+    formLogin.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const email = formLogin.email.value
+      const password= formLogin.password.value
+
+      console.log(email, password)
+    })
+  </script>
+
+  <script src="../javascript/main.js"></script>
+</body>
+</html>

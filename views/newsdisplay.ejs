@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/news.css">
+</head>
+<body>
+  <main>
+    <% title.forEach(element => {
+      console.log(typeof(element))
+      if(typeof(element) == 'object') {%>
+
+      <section class="main-content">
+        <div class="image"><img src="imagens/<%= element.url %>" alt=""></div>
+        <div class="title">
+          <div class="titulo"><h2><%= element.title %></h2></div>
+          <div class="change-buttons">
+            <button class="edit-button button">E</button>
+            <button class="delete-button button">D</button>
+          </div>
+        </div>
+      </section>
+    <%} else if(!typeof(element) == 'object') {
+      console.log(typeof(element))
+    }}) %>
+    <a href="news">
+      <div class="add-button"><img src="../icones/plusSign.png" alt="" class="add-icon"></div>
+    </a>
+  </main>
+
+</body>
+</html>

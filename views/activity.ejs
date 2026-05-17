@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/activities.css">
+</head>
+<body>
+  <main>
+    <section class="signup">
+      <div class="form">
+        <h1>Activity</h1>
+        <form action="">
+          <div class="input-div">
+            <div class="input title-div">
+              <label for="activity-title">Title</label>
+              <input type="text" name="title" class="title" id="activity-title" required>
+              <div class="activity error"></div>
+            </div>
+            <div class="input description-div">
+              <label for="activity-description">Description</label>
+              <textarea name="description" class="description" id="activity-description"></textarea>
+              <div class="description error"></div>
+            </div>
+            <div class="input file">
+              <label for="news-image">Escolha uma imagem</label>
+              <input type="file" multiple name="images" class="image" id="news-image">
+            </div>
+          </div>
+          <div class="success">
+
+          </div>
+          <div class="form-buttons">
+            <button>Publicar</button>
+            <div class="login-button">Cancelar</div>
+          </div>
+        </form>
+      </div>
+    </section>
+    
+  </main>
+
+  <script>
+    const formSignup = document.querySelector('form')
+    const titleError = document.querySelector('.title.error')
+    const descriptionError = document.querySelector('.description.error')
+    const title = document.querySelector('.title')
+    const description = document.querySelector('.description')
+    const fileInput = document.querySelector('.image')
+    const successMessage = document.querySelector('.success')
+    
+    formSignup.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const files = fileInput.files
+      console.log(files)
+      const formData = new FormData();
+      formData.append('title', title.value);
+      formData.append('description', description.value);
+      Array.from(files).forEach(file => formData.append('images', file))
+      try {
+        const res = await fetch('/activity', {
+          method: 'POST',
+          body: formData
+        })
+        const data = await res.json()
+        console.log(data)
+        if(data.err) {
+          titleError.textContent = data.err.email
+          descriptionError.textContent = data.err.password
+        } else{
+          successMessage.textContent = data.message
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    })
+  </script>
+
+</body>
+</html>
