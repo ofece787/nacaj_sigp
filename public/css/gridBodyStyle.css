@@ -1,0 +1,28 @@
+body{
+  display: grid;
+  grid-template-rows: 100px 1fr 60px;
+  gap: 20px;
+  height: 100svh;
+}
+
+header{
+  background-color: #202D59;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+header .app-logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: #fff;
+}
+.app-logo img{
+  width: 34px;
+  height: 34px;
+}
+
+.main-padding{
+  padding: 24px;
+}

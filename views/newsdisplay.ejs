@@ -7,30 +7,76 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/news.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/gridBodyStyle.css">
 </head>
 <body>
-  <main>
-    <% title.forEach(element => {
-      console.log(typeof(element))
-      if(typeof(element) == 'object') {%>
+  <header>
 
-      <section class="main-content">
-        <div class="image"><img src="imagens/<%= element.url %>" alt=""></div>
-        <div class="title">
-          <div class="titulo"><h2><%= element.title %></h2></div>
-          <div class="change-buttons">
-            <button class="edit-button button">E</button>
-            <button class="delete-button button">D</button>
-          </div>
-        </div>
-      </section>
-    <%} else if(!typeof(element) == 'object') {
-      console.log(typeof(element))
-    }}) %>
-    <a href="news">
-      <div class="add-button"><img src="../icones/plusSign.png" alt="" class="add-icon"></div>
-    </a>
+    <div class="app-logo">
+      <img src="../icones/logoNACAJalinhado.png" alt="">
+      <h1>NACAJ</h1>
+    </div>
+  </header>
+  <main>
+    <%if(title.length > 0){
+      title.forEach(element => {
+       if(typeof(element) == 'object') {%>
+ 
+         <section class="news-link">
+           <a href="/singlenewsdisplay/<%= element.title %>">
+             <section class="main-content">
+               <div class="image"><img src="imagens/<%= element.url %>" alt=""></div>
+               <div class="title">
+                 <div class="titulo"><h2><%= element.title %></h2></div>
+               </div>
+             </section>
+           </a>
+           <div class="change-buttons">
+             <a href=""><button class="edit-button buttons"><img src="../icones/pencil.png" alt=""></button></a>
+             <button class="delete-button buttons" data-doc="<%= element.title %>"><img src="../icones/trashcan.png" alt=""></button>
+           </div>
+         </section>
+     <%} 
+    })
+
+    } else {%>  
+    <section class="empty">
+      <p>Não existem noticias para mostrar!</p>
+    </section>
+  <%}%>
+  
+
   </main>
+  <footer>
+
+    <nav class="navigation">
+      <a href="/"><img src="../icones/world_2298220.png" alt=""></a>
+      <a href="news">
+        <div class="add-button button"><img src="../icones/plusSign.png" alt="" class="add-icon"></div>
+      </a>
+      <a href="/activitydisplay"><img src="../icones/checklist_7111148.png" alt=""></a>
+    </nav>
+  </footer>
+
+
+  <script>
+    let deleteButton = document.querySelector('.delete-button');
+
+    deleteButton.addEventListener('click', (e) => {
+      const endpoint = `/delete/${deleteButton.dataset.doc}`;
+
+      fetch(endpoint, {
+        method: 'DELETE'
+      })
+      .then(() => {
+
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    })
+  </script>
 
 </body>
 </html>

@@ -9,12 +9,12 @@
   <link rel="stylesheet" href="../css/news.css">
   <link rel="stylesheet" href="../css/navigation.css">
   <link rel="stylesheet" href="../css/gridBodyStyle.css">
+  <link rel="stylesheet" href="../css/activities.css">
 </head>
 <body>
 
-
   <header>
-    <a href="/" class="back-button">
+    <a href="/activitydisplay" class="back-button">
       <img src="../icones/back-arrow.png" alt="">
     </a>
     <div class="app-logo">
@@ -24,13 +24,17 @@
   </header>
   <main class="main-padding">
     <h1><%= data.title %></h1>
-    <img src="/imagens/<%= data.url %>" alt="">
-        
+    <section class="images">
+      <%
+      for(let i = 0; i < data.url.length; i++) {%>
+        <img src="/imagens/<%= data.url[i] %>" alt="">
+      <%}
+      %>
+    </section>
+    
     <%const dr = data.description.split('\r\n').map(para => `<p>${para.replace('\r\n', '<br>')}</p>`).join('')
     %>
-
-    <%- dr %>
-
+    <section class="paragrafos"><%- dr %></section>
   </main>
 
   <footer>
@@ -38,7 +42,7 @@
     <nav class="navigation">
       <a href="/"><img src="../icones/world_2298220.png" alt=""></a>
       <a href="">
-        <div class="update-button button"><img src="../icones/pencil.png" alt="" class="add-icon"></div>
+        <div class="add-button button"><img src="../icones/pencil.png" alt="" class="add-icon"></div>
       </a>
       <a href="/activitydisplay"><img src="../icones/checklist_7111148.png" alt=""></a>
     </nav>

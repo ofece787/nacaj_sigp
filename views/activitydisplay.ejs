@@ -4,8 +4,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/activities.css">
+  <link rel="stylesheet" href="css/gridBodyStyle.css">
+
 </head>
 <body>
+  <header>
+    <div class="app-logo">
+      <img src="../icones/logoNACAJalinhado.png" alt="">
+      <h1>NACAJ</h1>
+    </div>
+  </header>
   
+  <main>
+    <% if(title.length > 0) {
+      title.forEach(element => {
+        if(typeof(element) == 'object') {%>
+  
+          <section class="activities-link">
+            <a href="/singleactivitydisplay/<%= element.title %>">
+              <section class="main-content">
+                <div class="image"><img src="/imagens/<%=element.url[0]%>" alt=""></div>
+                <div class="title">
+                  <div class="titulo"><h2><%= element.title %></h2></div>
+                </div>
+              </section>
+            </a>
+            <div class="change-buttons">
+             <a href=""><button class="edit-button buttons"><img src="../icones/pencil.png" alt=""></button></a>
+             <a href=""><button class="delete-button buttons"><img src="../icones/trashcan.png" alt=""></button></a>
+           </div>
+          </section>
+
+    <%}})} else {%>
+    <section class="empty">
+      <p>Não existem atividades para mostrar!</p>
+    </section>
+    <%}%>
+  </main>
+
+  <footer>
+
+    <nav class="navigation">
+      <a href="/"><img src="../icones/world_2298220.png" alt=""></a>
+      <a href="activity">
+        <div class="add-button button"><img src="../icones/plusSign.png" alt="" class="add-icon"></div>
+      </a>
+      <a href="/activitydisplay"><img src="../icones/checklist_7111148.png" alt=""></a>
+    </nav>
+  </footer>
 </body>
 </html>

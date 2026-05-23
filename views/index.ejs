@@ -7,5 +7,21 @@
 </head>
 <body>
   
+  <header>
+    <a href="/" class="back-button">
+      <img src="../icones/back-arrow.png" alt="">
+    </a>
+    <div class="app-logo">
+      <img src="../icones/logoNACAJalinhado.png" alt="">
+      <h1>NACAJ</h1>
+    </div>
+  </header>
+  <h1><%= data.title %></h1>
+  <img src="/imagens/<%= data.url %>" alt="">
+      
+  <%const dr = data.description.split('\r\n').map(para => `<p>${para.replace('\r\n', '<br>')}</p>`).join('')
+  %>
+
+  <%- dr %>
 </body>
 </html>

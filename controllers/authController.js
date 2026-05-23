@@ -1,5 +1,6 @@
 const User = require("../models/User")
 const jwt = require('jsonwebtoken')
+const fs = require('fs')
 
 
 const handleErrors = (err) => {
@@ -57,6 +58,7 @@ module.exports.news_get = async (req, res) => {
 }
 
 let news = []
+let activities = []
 module.exports.newsDisplay_get = async (req, res) => {
   news.forEach(element => {
     console.log(element)
@@ -68,6 +70,18 @@ module.exports.newsDetails_get = async (req, res) => {
   const dado = news.find(u => u.title === title)
 
   res.json(dado)
+}
+module.exports.singleNewsDisplay_get = async (req, res) => {
+  const title = req.params.title
+  const dado = news.find(u => u.title === title)
+
+  res.render('newsdetails', {data: dado})
+}
+module.exports.singleActivityDisplay_get = async (req, res) => {
+  const title = req.params.title
+  const dado = activities.find(u => u.title === title)
+
+  res.render('activitydetails', {data: dado})
 }
 module.exports.newsDisplayJson_get = async (req, res) => {
   news.forEach(element => {
@@ -100,17 +114,39 @@ module.exports.activity_get = async (req, res) => {
   res.render('activity')
 }
 module.exports.activityDisplay_get = async (req, res) => {
-  const { title, description } = 
-  res.render('activitydisplay', {title})
+  res.render('activitydisplay', {title: activities})
+}
+module.exports.newsDelete_delete = async (req, res) => {
+  const title = req.params.title
+  const dado = news.find(u => u.title === title)
+  if(fs.existsSync(`./public/imagens/${dado.url}`)){
+    fs.unlink(`./public/imagens/${dado.url}`, (err) => {
+      if(err) {
+        console.log(err)
+      }
+      news.pop(title)
+    })
+    
+  }
 }
 module.exports.activity_post = (req, res) => {
   const activityData = req.body;
   const files = req.files.map(file => ({
-    originalName: file.originalname,
-    filename: file.filename,
-    path: file.path
+    filename: file.filename
   }))
-  console.log(activityData.title)
+  const filesNames = []
+  for(let i = 0; i < files.length; i++) {
+    filesNames.push(files[i].filename)
+  }
+  let newObject = {
+    title: activityData.title,
+    description: activityData.description,
+    url: filesNames
+  }
+  activities.push(newObject)
+  activities.forEach(element => {
+    console.log(element.title)
+  })
   res.json({
     message: "Dados e ficheiro recebidos com sucesso"
   })
