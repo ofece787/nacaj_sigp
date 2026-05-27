@@ -62,8 +62,8 @@ textarea{
 
 
 main{
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr 200px 1fr;
 }
 main:first-child{
   border-top: solid 2px #BDBDBD;
@@ -154,9 +154,14 @@ main:first-child{
 
 
 .images{
+  background-color: red;
   display: flex;
   gap: 14px;
+  height: 200px;
   overflow-x: auto;
+}
+.images img{
+  height: 100%;
 }
 
 h2{

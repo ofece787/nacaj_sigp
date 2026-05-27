@@ -1,6 +1,6 @@
 const User = require("../models/User")
 const jwt = require('jsonwebtoken')
-const fs = require('fs')
+const fs = require('fs').promises;
 
 
 const handleErrors = (err) => {
@@ -67,7 +67,13 @@ module.exports.newsDisplay_get = async (req, res) => {
 }
 module.exports.newsDetails_get = async (req, res) => {
   const title = req.params.title
-  const dado = news.find(u => u.title === title)
+  const dado = activities.find(u => u.title === title)
+
+  res.json(dado)
+}
+module.exports.activityDetails_get = async (req, res) => {
+  const title = req.params.title
+  const dado = activities.find(u => u.title === title)
 
   res.json(dado)
 }
@@ -118,16 +124,32 @@ module.exports.activityDisplay_get = async (req, res) => {
 }
 module.exports.newsDelete_delete = async (req, res) => {
   const title = req.params.title
-  const dado = news.find(u => u.title === title)
-  if(fs.existsSync(`./public/imagens/${dado.url}`)){
-    fs.unlink(`./public/imagens/${dado.url}`, (err) => {
-      if(err) {
-        console.log(err)
-      }
-      news.pop(title)
-    })
+  
+  async function deleteData(news, title) {
+    const dado = news.find(u => u.title === title)
+    if(!dado) {
+      console.log("Item not found")
+      return dado;
+    }
+
+    try {
+      await fs.unlink(`./public/imagens/${dado.url}`)
+      return news.filter(item => item.title !== title)
+    } catch (error) {
+      console.error(`Failed to delete the file ${dado.url}: `, error.message)
+      return news
+    }
     
   }
+  
+  news = await deleteData(news, title)
+  
+}
+module.exports.activityDisplayJson_get = async (req, res) => {
+  activities.forEach(element => {
+    console.log(element)
+  })
+  res.json(activities)
 }
 module.exports.activity_post = (req, res) => {
   const activityData = req.body;
