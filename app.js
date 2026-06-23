@@ -1,5 +1,6 @@
 const express = require('express')
 const authRoutes = require('./routes/authRouters')
+const newsRoutes = require('./routes/newsRouters.js')
 const cookieParser = require('cookie-parser')
 const multer = require('multer')
 const morgan = require('morgan')
@@ -7,11 +8,17 @@ const path = require('path')
 const {readdir} = require('node:fs/promises')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const {Client} = require('pg')
+const dotenv = require('dotenv')
+const pool = require('./config/db.js')
+
+
+dotenv.config();
 
 
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true}))
 
@@ -50,3 +57,8 @@ const upload = multer({
 })
 
 app.use(authRoutes)
+app.use(newsRoutes)
+app.get('/db', async(req, res) => {
+  const result = await pool.query("SELECT current_database()");
+  res.send(`The database name is: ${result.rows[0].current_database}`)
+})

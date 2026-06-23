@@ -154,10 +154,8 @@ main:first-child{
 
 
 .images{
-  background-color: red;
   display: flex;
   gap: 14px;
-  height: 200px;
   overflow-x: auto;
 }
 .images img{

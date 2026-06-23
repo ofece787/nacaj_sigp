@@ -19,12 +19,12 @@
     </div>
   </header>
   <main>
-    <%if(Array.isArray()){
-      title?.forEach(element => {
+    <%if(Array.isArray(result)){
+      result?.forEach(element => {
        if(typeof(element) == 'object') {%>
  
          <section class="news-link">
-           <a href="/singlenewsdisplay/<%= element.id %>">
+           <a href="/newsbyid/<%= element.id %>">
              <section class="main-content">
                <div class="image"><img src="imagens/<%= element.url %>" alt=""></div>
                <div class="title">
@@ -33,15 +33,26 @@
              </section>
            </a>
            <div class="change-buttons">
-             <a href=""><button class="edit-button buttons"><img src="../icones/pencil.png" alt=""></button></a>
-             <button class="delete-button buttons" data-doc="<%= element.id %>"><img src="../icones/trashcan.png" alt=""></button>
+             <a href="/newsupdate/<%= element.id %>"><button class="edit-button buttons"><img src="../icones/pencil.png" alt=""></button></a>
+             <button class="delete-button buttons"><img src="../icones/trashcan.png" alt=""></button>
+             <div class="confirm-background">
+               <div class="confirm-box">
+                 <div class="confirm-text">
+                  <p>Deseja realmente apagar esta noticia</p>
+                </div>
+                <div class="confirm-buttons">
+                  <div class="accept"><button id="delete-button" data-doc="<%= element.id %>">Ok</button></div>
+                  <div class="deny">Cancelar</div>
+                </div>
+              </div>
+             </div>
            </div>
          </section>
      <%} 
     })
 
     }
-     if(title.length <= 0) {%>  
+     if(result.length <= 0) {%>  
     <section class="empty">
       <p>Não existem noticias para mostrar!</p>
     </section>
@@ -62,15 +73,27 @@
 
 
   <script>
-    let deleteButton = document.querySelectorAll('.delete-button');
-    
-    deleteButton.forEach(element => {
-      console.log(`${element.dataset.doc}`)
-      
-      element.addEventListener('click', (e) => {
-        const endpoint = `/delete/${element.dataset.doc}`;
+    let deleteButtonTrigger = document.querySelectorAll('.change-buttons');
 
-  
+    deleteButtonTrigger.forEach(element => {
+      let triggerButton = element.children[1]
+      let confirmPane = element.children[2]
+      let deleteButton = confirmPane.children[0].children[1].children[0].children[0]
+      let cancel = confirmPane.children[0].children[1]
+      console.log(confirmPane)
+      triggerButton.addEventListener('click', () => {
+        confirmPane.style.width = '100svw'
+        confirmPane.style.height = '100svh'
+      })
+      cancel.addEventListener('click', () => {
+        confirmPane.style.width = '0svw'
+        confirmPane.style.height = '0svh'
+      })
+      console.log(deleteButton)
+      deleteButton.addEventListener('click', () => {
+        
+        const endpoint = `/delete/${deleteButton.dataset.doc}`;
+    
         fetch(endpoint, {
           method: 'DELETE'
         })
@@ -82,6 +105,8 @@
         })
       })
     })
+
+    
   </script>
 
 </body>

@@ -1,7 +1,9 @@
+.id{
+  display: none;
+}
 .news{
   display: flex;
   flex-direction: column;
-
 }
 form{
   display: flex;
@@ -126,4 +128,56 @@ h2{
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.images{
+  display: flex;
+  min-height: 200px;
+}
+
+.confirm-background{
+  background-color: #bdbdbd77;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1000000;
+  top: 0;
+  left: 0;
+  width: 0svw;
+  height: 0svh;
+  overflow: hidden;
+}
+.confirm-box{
+  background-color: #fff;
+  box-shadow: #808080 0px 0px 30px 8px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 360px;
+  height: 200px;
+}
+
+.confirm-box .confirm-buttons{
+  display: flex;
+  gap: 36px;
+}
+.confirm-box .confirm-buttons div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 4px;
+  color: #fff;
+}
+.confirm-box .confirm-buttons div:last-child{
+  background-color: red;
+}
+
+.confirm-box .confirm-buttons div:first-child{
+  background-color: #202D59;
+  padding: 5px 14px;
 }

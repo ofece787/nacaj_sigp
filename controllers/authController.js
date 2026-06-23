@@ -2,7 +2,38 @@ const User = require("../models/User")
 const jwt = require('jsonwebtoken')
 const fs = require('fs').promises;
 
+async function deleteData(news, title) {
+  const dado = news.find(u => u.title === title)
+  if(!dado) {
+    console.log("Item not found")
+    return dado;
+  }
 
+  try {
+    await fs.unlink(`./public/imagens/${dado.url}`)
+    return news.filter(item => item.title !== title)
+  } catch (error) {
+    console.error(`Failed to delete the file ${dado.url}: `, error.message)
+    return news
+  }
+  
+}
+async function updateData(news, title) {
+  const dado = news.find(u => u.title === title)
+  if(!dado) {
+    console.log("Item not found")
+    return dado;
+  }
+
+  try {
+    await fs.unlink(`./public/imagens/${dado.url}`)
+    return news.filter(item => item.title !== title)
+  } catch (error) {
+    console.error(`Failed to delete the file ${dado.url}: `, error.message)
+    return news
+  }
+  
+}
 const handleErrors = (err) => {
   console.log(err.message, err.code)
   let error =  { email: '', password: ''};
@@ -53,12 +84,20 @@ module.exports.login_get = async (req, res) => {
 module.exports.login_post = (req, res) => {
   res.send('user login')
 }
+let news = []
+let activities = []
 module.exports.news_get = async (req, res) => {
   res.render('news')
 }
+module.exports.newsupdate_get = async (req, res) => {
+  const title = req.params.title
+  const dado = news.find(u => u.title === title)
 
-let news = []
-let activities = []
+  
+  console.log(dado)
+  res.render('newsupdate', {title: dado.title, description: dado.description})
+}
+
 module.exports.newsDisplay_get = async (req, res) => {
   news.forEach(element => {
     console.log(element)
@@ -67,7 +106,7 @@ module.exports.newsDisplay_get = async (req, res) => {
 }
 module.exports.newsDetails_get = async (req, res) => {
   const title = req.params.title
-  const dado = activities.find(u => u.title === title)
+  const dado = news.find(u => u.title === title)
 
   res.json(dado)
 }
@@ -81,7 +120,8 @@ module.exports.singleNewsDisplay_get = async (req, res) => {
   const title = req.params.title
   const dado = news.find(u => u.title === title)
 
-  res.render('newsdetails', {data: dado})
+  
+  //res.render('newsdetails', {data: dado})
 }
 module.exports.singleActivityDisplay_get = async (req, res) => {
   const title = req.params.title
@@ -93,8 +133,7 @@ module.exports.newsDisplayJson_get = async (req, res) => {
   news.forEach(element => {
     console.log(element)
   })
-  res.json(news)
-}
+  res.json(news)}
 module.exports.news_post = (req, res) => {
   const newsData = req.body;
   const fileInfo = req.file;
@@ -116,6 +155,23 @@ module.exports.news_post = (req, res) => {
     
   }
 }
+module.exports.newsupdate_post = (req, res) => {
+  const newsData = req.body;
+  const fileInfo = req.file;
+
+  console.log(newsData, fileInfo)
+
+  if(newsData.image == 'undefined') {
+    
+  } else {
+
+  }
+
+
+  res.json({
+    message: "Dados e ficheiro recebidos com sucesso"
+  })
+}
 module.exports.activity_get = async (req, res) => {
   res.render('activity')
 }
@@ -125,22 +181,7 @@ module.exports.activityDisplay_get = async (req, res) => {
 module.exports.newsDelete_delete = async (req, res) => {
   const title = req.params.title
   
-  async function deleteData(news, title) {
-    const dado = news.find(u => u.title === title)
-    if(!dado) {
-      console.log("Item not found")
-      return dado;
-    }
-
-    try {
-      await fs.unlink(`./public/imagens/${dado.url}`)
-      return news.filter(item => item.title !== title)
-    } catch (error) {
-      console.error(`Failed to delete the file ${dado.url}: `, error.message)
-      return news
-    }
-    
-  }
+  
   
   news = await deleteData(news, title)
   

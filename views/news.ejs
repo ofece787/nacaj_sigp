@@ -91,9 +91,10 @@
       formData.append('image', file);
       
       try {
-        const res = await fetch('/news', {
+        const res = await fetch('/newscreate', {
           method: 'POST',
           body: formData,
+          
         })
         const data = await res.json()
         console.log(data)

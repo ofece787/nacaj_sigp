@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/news.css">
-  <link rel="stylesheet" href="css/gridBodyStyle.css">
-  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/news.css">
+  <link rel="stylesheet" href="../css/gridBodyStyle.css">
+  <link rel="stylesheet" href="../css/navigation.css">
 </head>
 <body>
   <header>
@@ -25,19 +25,20 @@
       <h1>Noticias Atualizacao</h1>
       <form action="">
         <div class="input-div">
+          <input type="number" disabled name="id" class="id" value="<%= result.id %>">
           <div class="input title-div">
             <label for="news-title">Titulo</label>
-            <input type="text" class="title" name="title" id="news-title" placeholder="Escreva o titulo da noticia" required>
+            <input type="text" value="<%= result.title %>" class="title" name="title" id="news-title" placeholder="Escreva o titulo da noticia" required>
             <div class="news error"></div>
           </div>
           <div class="input description-div">
             <label for="news-description">Descrição</label>
-            <textarea name="description" class="description" id="news-description" placeholder="Escreva aqui o conteudo da noticia" required></textarea>
+            <textarea name="description" class="description" id="news-description" placeholder="Escreva aqui o conteudo da noticia" required><%= result.description %></textarea>
             <div class="description error"></div>
           </div>
           <div class="input file">
             <label for="news-image">Escolha uma imagem</label>
-            <input type="file" name="image" class="image" id="news-image">
+            <input type="file" name="image" class="image" id="news-image" disabled>
           </div>
         </div>
         <div class="success">
@@ -67,6 +68,7 @@
     const titleError = document.querySelector('.news.error')
     const descriptionError = document.querySelector('.description.error')
     const cancelButton = document.querySelector('.cancel')
+    const id = document.querySelector('.id')
     const title = document.querySelector('.title')
     const description = document.querySelector('.description')
     const fileInput = document.querySelector('.image')
@@ -79,20 +81,21 @@
         console.log('full')
       }
     })
+    console.log(id)
     
     formSignup.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const file = fileInput.files[0]
       const formData = new FormData();
+      formData.append('id', id.value)
       formData.append('title', title.value);
       formData.append('description', description.value);
-      formData.append('uploadDate', new Date().toISOString())
       formData.append('image', file);
       
       try {
-        const res = await fetch('/news', {
-          method: 'POST',
+        const res = await fetch('/newsupdate', {
+          method: 'PATCH',
           body: formData,
         })
         const data = await res.json()

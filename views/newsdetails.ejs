@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title><%= result.title %></title>
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/news.css">
@@ -23,12 +23,12 @@
     </div>
   </header>
   <main class="main-padding">
-    <h1><%= data.title %></h1>
-    <img src="/imagens/<%= data.url %>" alt="">
+    <h1><%= result.title %></h1>
+    <img src="/imagens/<%= result.url %>" alt="">
         
-    <%const dr = data.description.split('\r\n').map(para => `<p>${para.replace('\r\n', '<br>')}</p>`).join('')
+    <%const dr = result.description.split('\r\n').map(para => `<p>${para.replace('\r\n', '<br>')}</p>`).join('')
+    console.log(result.url)
     %>
-
     <%- dr %>
 
   </main>
@@ -37,7 +37,7 @@
 
     <nav class="navigation">
       <a href="/"><img src="../icones/world_2298220.png" alt=""></a>
-      <a href="">
+      <a href="/newsupdate/<%= result.id %>">
         <div class="update-button button"><img src="../icones/pencil.png" alt="" class="add-icon"></div>
       </a>
       <a href="/activitydisplay"><img src="../icones/checklist_7111148.png" alt=""></a>
