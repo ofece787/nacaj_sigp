@@ -15,5 +15,6 @@ router.get('/newscreate', newsController.createNewsGet)
 router.post('/newscreate', upload.single('image'), newsController.createNews)
 router.patch('/newsupdate', upload.single('image'), newsController.updateNewsPost)
 router.delete('/delete/:id', newsController.deleteNews)
+router.get('/newsbackup', newsController.newsBackup)
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const { createNews, getAllNews, getNewsById, updateNews, updateNewsImage, deleteNews } = require("../models/newsModel");
+const { createNews, getAllNews, getNewsById, updateNews, updateNewsImage, deleteNews, newsBackup } = require("../models/newsModel");
 const fs = require('fs').promises;
 
 const handleResponse = (res, status, message, data = null) => {
@@ -91,6 +91,13 @@ module.exports.deleteNews = async (req, res, next) => {
       const news = await deleteNews(id)
     })
     const news = await deleteNews(id)
+  } catch (error) {
+    next(error)
+  }
+}
+module.exports.newsBackup = async (req, res, next) => {
+  try {
+    const news = await newsBackup();
   } catch (error) {
     next(error)
   }

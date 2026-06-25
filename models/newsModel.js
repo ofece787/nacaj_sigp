@@ -23,3 +23,7 @@ module.exports.deleteNews = async (id) => {
   const result = await pool.query("DELETE FROM noticias where id=$1 RETURNING *", [id]);
   return result.rows[0]
 };
+module.exports.newsBackup = async () => {
+  const result = await pool.query("COPY noticias TO 'Downloads/noticias.csv' DELIMITER ','");
+  return result.rows;
+};

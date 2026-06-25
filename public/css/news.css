@@ -1,6 +1,9 @@
 .id{
   display: none;
 }
+header{
+  position: relative;
+}
 .news{
   display: flex;
   flex-direction: column;
@@ -181,4 +184,24 @@ h2{
 .confirm-box .confirm-buttons div:first-child{
   background-color: #202D59;
   padding: 5px 14px;
+}
+
+.backup{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  padding: 24px;
+}
+.backup div {
+  border: solid 2px #808080;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 16px;
+}
+.backup div p {
+  font-size: .9em;
 }
