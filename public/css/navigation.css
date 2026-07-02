@@ -47,3 +47,44 @@
   align-items: center;
   justify-content: center;
 }
+.menu-button{
+  cursor: pointer;
+  position: absolute;
+  left: 34px;
+}
+.menu-button img{
+  width: 24px;
+}
+
+.head-navigation{
+  position: absolute;
+  top: 100px;
+  left: 0;
+  background-color: #202D59;
+  display: flex;
+  flex-direction: column;
+  height: calc(100svh - 100px);
+  width: 300px;
+  padding: 34px;
+  justify-content: space-between;
+  color: #fff;
+  overflow: hidden;
+  transition: 100ms;
+}
+
+.head-navigation .links{
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.head-navigation .links a{
+  color: #fff;
+  padding: 8px;
+  border-radius: 4px;
+  width: 100%;
+}
+.head-navigation .links a.active{
+  background-color: #c0c0c0;
+  color: #202D59;
+}

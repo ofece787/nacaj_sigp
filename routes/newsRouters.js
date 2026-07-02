@@ -3,6 +3,7 @@ const newsController = require('../controllers/newsController')
 const authController = require('../controllers/authController')
 const upload = require('../config/multerConfig')
 const uploadController = require('../controllers/uploadController')
+const backupController = require('../controllers/backupController')
 
 const router = Router(); 
 
@@ -15,6 +16,6 @@ router.get('/newscreate', newsController.createNewsGet)
 router.post('/newscreate', upload.single('image'), newsController.createNews)
 router.patch('/newsupdate', upload.single('image'), newsController.updateNewsPost)
 router.delete('/delete/:id', newsController.deleteNews)
-router.get('/newsbackup', newsController.newsBackup)
+router.get('/newsbackup', backupController.exportData)
 
 module.exports = router;
