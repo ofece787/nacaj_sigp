@@ -64,8 +64,8 @@
   display: flex;
   flex-direction: column;
   height: calc(100svh - 100px);
-  width: 300px;
-  padding: 34px;
+  width: 0px;
+  padding: 0px;
   justify-content: space-between;
   color: #fff;
   overflow: hidden;
@@ -79,12 +79,23 @@
   gap: 14px;
 }
 .head-navigation .links a{
+  cursor: pointer;
+  transition: 100ms;
   color: #fff;
   padding: 8px;
   border-radius: 4px;
   width: 100%;
 }
+.head-navigation .links a:hover{
+  background-color: #fff;
+  color: #202D59;
+}
 .head-navigation .links a.active{
   background-color: #c0c0c0;
   color: #202D59;
+}
+
+.nacaj{
+  border-top: solid 2px #c0c0c0;
+  padding-top: 18px;
 }

@@ -7,7 +7,7 @@ const backupController = require('../controllers/backupController')
 
 const router = Router(); 
 
-router.get('/', newsController.getAllNews)
+router.get('/newsdisplay', newsController.getAllNews)
 router.get('/newsupdate/:id', newsController.updateNewsGet)
 router.get('/newsdetails/:id', newsController.getNewsByIdJson)
 router.get('/newsdisplayjson', newsController.getAllNewsJson)

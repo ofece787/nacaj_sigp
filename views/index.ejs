@@ -4,24 +4,66 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="shortcut icon" href="../icones/logoNACAJalinhado.png" type="image/x-icon">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/news.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/gridBodyStyle.css">
 </head>
 <body>
   
-  <header>
-    <a href="/" class="back-button">
-      <img src="../icones/back-arrow.png" alt="">
-    </a>
+    <header>
+    <button class="menu-button"><img src="../icones/humburguer.png" alt=""></button>
+    <nav class="head-navigation">
+      <div class="links">
+        <a href="/" class="active">Inicio</a>
+        <a href="">Membros</a>
+        <a href="">Orgaos de direcao</a>
+        <a href="">Projectos</a>
+        <a href="/activitydisplay">Activades</a>
+        <a href="/newsdisplay">Noticias</a>
+        <a class="event-button">Eventos</a>
+      </div>
+      <div class="nacaj">© NACAJ</div>
+    </nav>
+
     <div class="app-logo">
       <img src="../icones/logoNACAJalinhado.png" alt="">
       <h1>NACAJ</h1>
     </div>
   </header>
-  <h1><%= data.title %></h1>
-  <img src="/imagens/<%= data.url %>" alt="">
-      
-  <%const dr = data.description.split('\r\n').map(para => `<p>${para.replace('\r\n', '<br>')}</p>`).join('')
-  %>
 
-  <%- dr %>
+  <main>
+    <section class="eventos">
+      <button class="event-panel-close">fechar</button>
+      <div class="header-two">
+        <h2>Eventos</h2>
+      </div>
+      <div class="events">
+        <div>
+          <h3>Um de junho solidario</h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat laudantium libero numquam beatae omnis repudiandae? Cumque sed iusto accusantium. Odio minima, fugit excepturi ipsum doloribus itaque animi deserunt dicta porro?</p>
+        </div>
+        <div>
+          <h3></h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat laudantium libero numquam beatae omnis repudiandae? Cumque sed iusto accusantium. Odio minima, fugit excepturi ipsum doloribus itaque animi deserunt dicta porro?</p>
+        </div>
+        <div>
+          <h3></h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat laudantium libero numquam beatae omnis repudiandae? Cumque sed iusto accusantium. Odio minima, fugit excepturi ipsum doloribus itaque animi deserunt dicta porro?</p>
+        </div>
+        <div>
+          <h3></h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat laudantium libero numquam beatae omnis repudiandae? Cumque sed iusto accusantium. Odio minima, fugit excepturi ipsum doloribus itaque animi deserunt dicta porro?</p>
+        </div>
+        <div>
+          <h3></h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat laudantium libero numquam beatae omnis repudiandae? Cumque sed iusto accusantium. Odio minima, fugit excepturi ipsum doloribus itaque animi deserunt dicta porro?</p>
+        </div>
+            </section>
+      </div>
+  </main>
+  <script src="../javascript/navigation.js"></script>
 </body>
 </html>

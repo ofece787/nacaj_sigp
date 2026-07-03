@@ -26,3 +26,37 @@ header .app-logo{
 .main-padding{
   padding: 24px;
 }
+
+.eventos{
+  position: relative;
+  position: absolute;
+  top: 100px;
+  right: 10px;
+  background-color: #fff;
+  box-shadow: #808080 0px 0px 20px 5px;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 0px;
+  height: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: space-between;
+}
+.events{
+  overflow-y: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+.events div{
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.eventos .event-panel-close{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}

@@ -17,5 +17,6 @@ router.get('/activitydisplay', authController.activityDisplay_get)
 router.get('/activitydisplayjson', authController.activityDisplayJson_get)
 router.post('/activity', upload.array('images'), authController.activity_post)
 router.get('/singleactivitydisplay/:title', authController.singleActivityDisplay_get)
+router.get('/', authController.main_page)
 
 module.exports = router;

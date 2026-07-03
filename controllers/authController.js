@@ -86,6 +86,9 @@ module.exports.login_post = (req, res) => {
 }
 let news = []
 let activities = []
+module.exports.main_page = async (req, res) => {
+  res.render('index')
+}
 module.exports.news_get = async (req, res) => {
   res.render('news')
 }
