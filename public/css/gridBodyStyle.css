@@ -28,6 +28,7 @@ header .app-logo{
 }
 
 .eventos{
+  transition: 100ms;
   position: relative;
   position: absolute;
   top: 100px;
