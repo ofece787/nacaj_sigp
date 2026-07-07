@@ -11,8 +11,8 @@ module.exports.getNewsById = async (id) => {
   return result.rows[0];
 
 };
-module.exports.createNews = async (title, description, url) => {
-  const result = await pool.query("INSERT INTO noticias (title, description, url) values ($1, $2, $3) RETURNING *", [title, description, url]);
+module.exports.createNews = async (title, description) => {
+  const result = await pool.query("INSERT INTO noticias (title, description) values ($1, $2) RETURNING *", [title, description]);
   return result.rows[0];
 };
 module.exports.updateNews = async (id, title, description) => {

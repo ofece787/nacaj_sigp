@@ -12,7 +12,7 @@
 </head>
 <body>
   <header>
-    <a href="/" class="back-button">
+    <a href="/newsdisplay" class="back-button">
       <img src="../icones/back-arrow.png" alt="">
     </a>
     <div class="app-logo">
@@ -34,10 +34,6 @@
             <label for="news-description">Descrição</label>
             <textarea name="description" class="description" id="news-description" placeholder="Escreva aqui o conteudo da noticia" required></textarea>
             <div class="description error"></div>
-          </div>
-          <div class="input file">
-            <label for="news-image">Escolha uma imagem</label>
-            <input type="file" name="image" class="image" id="news-image">
           </div>
         </div>
         <div class="success">
@@ -67,9 +63,6 @@
     const titleError = document.querySelector('.news.error')
     const descriptionError = document.querySelector('.description.error')
     const cancelButton = document.querySelector('.cancel')
-    const title = document.querySelector('.title')
-    const description = document.querySelector('.description')
-    const fileInput = document.querySelector('.image')
     const successMessage = document.querySelector('.success')
 
     cancelButton.addEventListener('click', () => {
@@ -83,17 +76,14 @@
     formSignup.addEventListener('submit', async (e) => {
       e.preventDefault();
       
-      const file = fileInput.files[0]
-      const formData = new FormData();
-      formData.append('title', title.value);
-      formData.append('description', description.value);
-      formData.append('uploadDate', new Date().toISOString())
-      formData.append('image', file);
-      
+      const title = formSignup.title.value
+      const description = formSignup.description.value
+
       try {
         const res = await fetch('/newscreate', {
           method: 'POST',
-          body: formData,
+          body: JSON.stringify({ title, description }),
+          headers: {'Content-Type': 'application/json'}
           
         })
         const data = await res.json()

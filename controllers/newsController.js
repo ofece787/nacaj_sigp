@@ -10,11 +10,11 @@ const handleResponse = (res, status, message, data = null) => {
 }
 
 module.exports.createNews = async (req, res, next) => {
-  const { title, description } = req.body;
-  const fileInfo = req.file;
+  const { title, description } = req.body
 
+  console.log(title, description)
   try {
-    const newNews = await createNews(title, description, fileInfo.filename)
+    const newNews = await createNews(title, description)
     res.json({
       message: `Dados e ficheiro recebidos com sucesso e todo o resto`
     })
